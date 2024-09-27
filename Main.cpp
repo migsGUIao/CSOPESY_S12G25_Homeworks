@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include <unordered_map>
-#include "Colors.c"
+#include "Colors.h"
 
 using namespace std;
 
@@ -38,31 +38,27 @@ string getCurrentTimestamp() {
 
 void displayProcessInfo(const string& processName) {
     // Check if process exists
-    if (processes.find(processName) != processes.end() && processes[processName].active) {
-        clearScreen();
-        ProcessInfo &info = processes[processName];
+    clearScreen();
+    ProcessInfo &info = processes[processName];
 
-        cout << "Process: " << processName << endl;
-        cout << "ID: " << info.id << endl;
-        cout << "\nCurrent instruction line: " << info.currentLine << endl;
-        cout << "Lines of code: " << info.totalLine << endl;
-        cout << "===============================" << endl;
-        cout << "Created At: " << info.timestamp << endl;
+    cout << "Process: " << processName << endl;
+    cout << "ID: " << info.id << endl;
+    cout << "\nCurrent instruction line: " << info.currentLine << endl;
+    cout << "Lines of code: " << info.totalLine << endl;
+    cout << "===============================" << endl;
+    cout << "Created At: " << info.timestamp << endl;
 
-        string command;
-        while (true) {
-            cout << "\nType 'exit' to return to the main menu!" << endl;
-            cout << "root:\\> ";
-            getline(cin, command);
+    string command;
+    while (true) {
+        cout << "\nType 'exit' to return to the main menu!" << endl;
+        cout << "root:\\> ";
+        getline(cin, command);
 
-            if (command == "exit") {
-                break;  
-            } else {
-                cout << "\nInvalid command. Type 'exit' to go back.";
-            }
+        if (command == "exit") {
+            break;  
+        } else {
+            cout << "\nInvalid command. Type 'exit' to go back.";
         }
-    } else {
-        cout << "Process" << processName << " is not active or does not exist." << endl;
     }
     
     clearScreen();
@@ -74,14 +70,19 @@ void toggleProcess(const string& processName) {
 
     if (processes.find(processName) != processes.end()) {
         // If process exists, it will be active
-        processes[processName].active = !processes[processName].active;
+        // info is printed
         if (processes[processName].active) {
-            cout << "Process " << processName << " reactivated." << endl;
-        } else {
-            cout << "Process " << processName << " deactivated." << endl;
-        }
+            displayProcessInfo(processName);
+        } 
     } else {
-        // Create new process
+        cout << "Process " << processName << " does not exist. Use 'screen -s <name> to create it." << endl;
+    }
+}
+
+void createProcess(const string& processName) {
+    static int processCtr = 0;
+
+    if (processes.find(processName) == processes.end()) {
         ProcessInfo newProcess;
         newProcess.currentLine = 10; 
         newProcess.totalLine = 100;  
@@ -90,8 +91,10 @@ void toggleProcess(const string& processName) {
         newProcess.active = true;
         
         processes[processName] = newProcess;
-        
-        cout << "New process " << processName << " created." << endl;
+
+        displayProcessInfo(processName);
+    } else {
+        cout << "Process " << processName << " already exists." << endl;
     }
 }
 
@@ -112,7 +115,8 @@ int main() {
         cout <<"COMMANDS\n";
         cout <<"_____________________________________________\n";
         cout <<"'initalize'\n";
-        cout <<"'screen'\n";
+        cout <<"'screen -s <name>'\n";
+        cout <<"'screen -r <name>'\n";
         cout <<"'scheduler-test'\n";
         cout <<"'report-until'\n";
         cout <<"'clear'\n";
@@ -127,21 +131,20 @@ int main() {
 
         if(input == "initialize") {
             cout << "Initialize command recognized. Doing something\n";
-        } else if(input == "screen") {
-            cout << "Screen command recognized. Doing something\n";
+        } else if (input.substr(0, 10) == "screen -s ") {
+            processName = input.substr(10);
+            createProcess(processName);
+        } else if (input.substr(0, 10) == "screen -r ") {
+            processName = input.substr(10);
+            toggleProcess(processName);
+            
         } else if(input == "scheduler-test") {
             cout << "Scheduler-test command recognized. Doing something\n";
         } else if(input == "report-until") {
             cout << "Report-until command recognized. Doing something\n";
         } else if(input == "clear") {
             clearScreen();
-        } else if (input.substr(0, 10) == "screen -r ") {
-            processName = input.substr(10);
-            toggleProcess(processName);
-            if (processes[processName].active) {
-                displayProcessInfo(processName);
-            }
-        } else if(input == "exit") {
+        }  else if(input == "exit") {
             exit(0);
         } else{
             cout << "Invalid command!\n";
