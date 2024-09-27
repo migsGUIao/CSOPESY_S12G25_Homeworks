@@ -2,10 +2,21 @@
 #include <string.h>
 #include <ctime>
 #include <iomanip>
+#include <unordered_map>
 #include "Colors.c"
 
 using namespace std;
-string input;
+
+struct ProcessInfo {
+    string name;
+    int id;
+    int currentLine;
+    int totalLine;
+    string timestamp;
+    bool active;
+};
+
+unordered_map<string, ProcessInfo> processes;
 
 void clearScreen() {
     #ifdef _WIN32
@@ -19,50 +30,76 @@ string getCurrentTimestamp() {
     time_t now = time(0);
     tm *ltm = localtime(&now);
     
-    // Time format: mm/dd/yyyy hh:mm:ss AM/PM
+    // MM/DD/YYYY HH:MM:SS AM/PM
     char timeStr[100];
     strftime(timeStr, sizeof(timeStr), "%m/%d/%Y, %I:%M:%S %p", ltm);
     return string(timeStr);
 }
 
-// Function to draw layout based on the '-r <name>' command
 void displayProcessInfo(const string& processName) {
-    int currentLine = 10; // Example current line of instruction
-    int totalLine = 100;  // Example total lines of instruction
-    int ID = 50; // Example of ID
-    
-    string timestamp = getCurrentTimestamp();
+    // Check if process exists
+    if (processes.find(processName) != processes.end() && processes[processName].active) {
+        clearScreen();
+        ProcessInfo &info = processes[processName];
 
-    clearScreen();
-    
-    cout << "Process: " << processName << endl;
-    cout << "ID: " << ID << endl;
-    cout << "\nCurrent instruction line: " << currentLine << endl;
-    cout << "Lines of code: " << totalLine << endl;
-    cout << "===============================" << endl;
-    cout << "Created At: " << timestamp << endl;
-    
-    // Wait for user to type 'exit to return to the main menu
-    string command;
-    while (true) {
-        cout << "\nType 'exit' to return to the main menu!" << endl;
-        cout << "root:\\> ";
-        getline(cin, command);
+        cout << "Process: " << processName << endl;
+        cout << "ID: " << info.id << endl;
+        cout << "\nCurrent instruction line: " << info.currentLine << endl;
+        cout << "Lines of code: " << info.totalLine << endl;
+        cout << "===============================" << endl;
+        cout << "Created At: " << info.timestamp << endl;
 
-        if (command == "exit") {
-            break;  // Exit the loop and return to the main menu
-        } else {
-            cout << "\nInvalid command. Type 'exit' to go back.";
+        string command;
+        while (true) {
+            cout << "\nType 'exit' to return to the main menu!" << endl;
+            cout << "root:\\> ";
+            getline(cin, command);
+
+            if (command == "exit") {
+                break;  
+            } else {
+                cout << "\nInvalid command. Type 'exit' to go back.";
+            }
         }
+    } else {
+        cout << "Process" << processName << " is not active or does not exist." << endl;
     }
+    
     clearScreen();
+}
+
+void toggleProcess(const string& processName) {
+
+    static int processCtr = 0;
+
+    if (processes.find(processName) != processes.end()) {
+        // If process exists, it will be active
+        processes[processName].active = !processes[processName].active;
+        if (processes[processName].active) {
+            cout << "Process " << processName << " reactivated." << endl;
+        } else {
+            cout << "Process " << processName << " deactivated." << endl;
+        }
+    } else {
+        // Create new process
+        ProcessInfo newProcess;
+        newProcess.currentLine = 10; 
+        newProcess.totalLine = 100;  
+        newProcess.id = ++processCtr; // increment ID
+        newProcess.timestamp = getCurrentTimestamp();
+        newProcess.active = true;
+        
+        processes[processName] = newProcess;
+        
+        cout << "New process " << processName << " created." << endl;
+    }
 }
 
 
 int main() {
-    string processName;
+    string processName, input;
 
-    while(input != "exit"){
+    while(input != "exit") {
         cout <<"   ____ ____   ___  ____  _____ ______   __         " << endl;
         cout <<"  / ___/ ___| / _ \\|  _ \\| ____/ ___\\ \\ / /     " << endl;
         cout <<" | |   \\___ \\| | | | |_) |  _| \\___ \\\\ v /     " << endl;
@@ -88,22 +125,25 @@ int main() {
         cout <<"Enter a Command: ";
         getline(cin, input);
 
-        if(input == "initialize"){
+        if(input == "initialize") {
             cout << "Initialize command recognized. Doing something\n";
-        }else if(input == "screen"){
+        } else if(input == "screen") {
             cout << "Screen command recognized. Doing something\n";
-        }else if(input == "scheduler-test"){
+        } else if(input == "scheduler-test") {
             cout << "Scheduler-test command recognized. Doing something\n";
-        }else if(input == "report-until"){
+        } else if(input == "report-until") {
             cout << "Report-until command recognized. Doing something\n";
-        }else if (input.substr(0, 10) == "screen -r ") {
-            processName = input.substr(10);
-            displayProcessInfo(processName);
-        }else if(input == "clear"){
+        } else if(input == "clear") {
             clearScreen();
-        }else if(input == "exit"){
+        } else if (input.substr(0, 10) == "screen -r ") {
+            processName = input.substr(10);
+            toggleProcess(processName);
+            if (processes[processName].active) {
+                displayProcessInfo(processName);
+            }
+        } else if(input == "exit") {
             exit(0);
-        }else{
+        } else{
             cout << "Invalid command!\n";
         }
     }
