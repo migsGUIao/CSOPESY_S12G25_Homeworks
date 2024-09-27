@@ -64,7 +64,7 @@ void displayProcessInfo(const string& processName) {
     clearScreen();
 }
 
-void toggleProcess(const string& processName) {
+void retrieveProcess(const string& processName) {
 
     static int processCtr = 0;
 
@@ -136,8 +136,7 @@ int main() {
             createProcess(processName);
         } else if (input.substr(0, 10) == "screen -r ") {
             processName = input.substr(10);
-            toggleProcess(processName);
-            
+            retrieveProcess(processName);
         } else if(input == "scheduler-test") {
             cout << "Scheduler-test command recognized. Doing something\n";
         } else if(input == "report-until") {
