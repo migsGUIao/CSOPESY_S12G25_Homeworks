@@ -1,8 +1,13 @@
 #include <iostream>
-#include <string.h>
-#include <ctime>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <fstream>
 #include <iomanip>
 #include <unordered_map>
+#include <vector>
+#include <queue>
+#include <string>
 #include "Colors.h"
 
 using namespace std;
@@ -14,9 +19,13 @@ struct ProcessInfo {
     int totalLine;
     string timestamp;
     bool active;
+    int coreNumber;
 };
 
 unordered_map<string, ProcessInfo> processes;
+queue<string> processQueue;  
+mutex mtx;                    
+vector<string> finishedProcesses; 
 
 void clearScreen() {
     #ifdef _WIN32
@@ -26,14 +35,96 @@ void clearScreen() {
     #endif
 }
 
+const int NUM_CORES = 4;     
+int coreAvailability[NUM_CORES] = {0};  
+
 string getCurrentTimestamp() {
     time_t now = time(0);
     tm *ltm = localtime(&now);
     
     // MM/DD/YYYY HH:MM:SS AM/PM
     char timeStr[100];
-    strftime(timeStr, sizeof(timeStr), "%m/%d/%Y, %I:%M:%S %p", ltm);
+    strftime(timeStr, sizeof(timeStr), "%m/%d/%Y %I:%M:%S%p", ltm);
     return string(timeStr);
+}
+
+// Simulate a process running on a core
+void runProcess(string processName) {
+    // Get the process info
+    ProcessInfo& process = processes[processName];
+
+    // Write to file
+    ofstream outfile(processName + "_log.txt");
+    outfile << "Process name: " << processName << endl;
+    outfile << "Logs:\n" << endl;
+    
+    for (int i = 1; i <= process.totalLine; ++i) {
+        this_thread::sleep_for(chrono::milliseconds(100));  // Simulate work
+
+        string currentTimeStamp = getCurrentTimestamp();
+
+        // print to console
+        mtx.lock();
+        cout << processName << "  (" << currentTimeStamp << ")" << "  Core: " << process.coreNumber << "   " << i << "/" << process.totalLine << endl;;
+        mtx.unlock();
+
+        // Write to the file
+        outfile << "(" << currentTimeStamp << ")" << "   Core: " << process.coreNumber << "   'Hello world from screen " << processName << "!'" << endl;
+
+        // Update progress in memory
+        mtx.lock();
+        process.currentLine = i;
+        mtx.unlock();
+    }
+
+    mtx.lock();
+    process.active = false;
+    coreAvailability[process.coreNumber] = 0;
+
+    // Mark final status in the file
+    outfile << "\nProcess finished at line " << process.totalLine << "/" << process.totalLine << endl;
+    outfile << "Status: Finished" << endl;
+    outfile.close();  // Close the file when process is done
+
+    finishedProcesses.push_back(processName);  // Add to finished list
+    mtx.unlock();
+}
+
+// FCFS scheduler that assigns processes to available cores
+void fcfsScheduler() {
+    while (!processQueue.empty()) {
+        mtx.lock();
+        string processName = processQueue.front();
+        processQueue.pop();
+        mtx.unlock();
+
+        // Find an available core
+        int assignedCore = -1;
+        while (assignedCore == -1) {
+            mtx.lock();
+            for (int i = 0; i < NUM_CORES; i++) {
+                if (coreAvailability[i] == 0) {  // Core is available
+                    coreAvailability[i] = 1;     // Core is now currently in use
+                    assignedCore = i;
+                    break;
+                }
+            }
+            mtx.unlock();
+            if (assignedCore == -1) {
+                this_thread::sleep_for(chrono::milliseconds(100));  // Wait for a core to be free
+            }
+        }
+
+        // Assign process to the core
+        mtx.lock();
+        processes[processName].coreNumber = assignedCore;
+        processes[processName].active = true;
+        mtx.unlock();
+
+        // Run the process in a new thread and store it
+        thread t(runProcess, processName);
+        t.detach();
+    }
 }
 
 void displayProcessInfo(const string& processName) {
@@ -64,40 +155,64 @@ void displayProcessInfo(const string& processName) {
     clearScreen();
 }
 
-void retrieveProcess(const string& processName) {
-
-    static int processCtr = 0;
-
-    if (processes.find(processName) != processes.end()) {
-        // If process exists, it will be active
-        // info is printed
-        if (processes[processName].active) {
-            displayProcessInfo(processName);
-        } 
-    } else {
-        cout << "Process " << processName << " does not exist. Use 'screen -s <name> to create it." << endl;
-    }
-}
-
 void createProcess(const string& processName) {
     static int processCtr = 0;
 
     if (processes.find(processName) == processes.end()) {
         ProcessInfo newProcess;
         newProcess.currentLine = 10; 
-        newProcess.totalLine = 100;  
+        newProcess.totalLine = 100; // 100 lines to print
         newProcess.id = ++processCtr; // increment ID
         newProcess.timestamp = getCurrentTimestamp();
         newProcess.active = true;
+        newProcess.coreNumber = -1;
         
         processes[processName] = newProcess;
 
-        displayProcessInfo(processName);
+        mtx.lock();
+        processQueue.push(processName);
+        mtx.unlock();
     } else {
         cout << "Process " << processName << " already exists." << endl;
     }
 }
 
+void retrieveProcess(const string& processName) {
+
+    static int processCtr = 0;
+
+    if (processes.find(processName) != processes.end()) {
+        displayProcessInfo(processName);
+    } else {
+        cout << "Process " << processName << " does not exist. Use 'screen -s <name> to create it." << endl;
+    }
+}
+
+void schedulerTest() {
+    string processName;
+
+    // create 10 processes
+    for (int i = 1; i <= 10; i++) {
+        processName = "process0" + to_string(i);
+        if (i > 9)
+            processName = "process" + to_string(i);
+        createProcess(processName);
+    }
+
+    cout << "------------------------------------------------" << endl;
+    cout << "Running processes:" << endl;
+    // Start the FCFS scheduler
+    fcfsScheduler();
+
+    this_thread::sleep_for(chrono::seconds(20));
+
+    // Display finished process details
+    cout << "\nFinished processes:\n";
+    for (const string& p : finishedProcesses) {
+        cout << p << "  (" << processes[p].timestamp << ")"  << "  Finished  " << processes[p].currentLine << "/" << processes[p].totalLine << endl;
+    }
+    cout << "------------------------------------------------" << endl;
+}
 
 int main() {
     string processName, input;
@@ -138,7 +253,7 @@ int main() {
             processName = input.substr(10);
             retrieveProcess(processName);
         } else if(input == "scheduler-test") {
-            cout << "Scheduler-test command recognized. Doing something\n";
+            schedulerTest();
         } else if(input == "report-until") {
             cout << "Report-until command recognized. Doing something\n";
         } else if(input == "clear") {
