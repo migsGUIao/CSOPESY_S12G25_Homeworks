@@ -1,6 +1,6 @@
 Rewrote the whole code in OOP paradigm to accomodate readability and scalability of code. The code contains 5 header and cpp files.
 
-Header files: [Contains function prototypes and fields of the class (except Colors.h which contains macros to color the text in the command line)]
+Header files: [Contains function prototypes and fields of the corresponding class (except Colors.h which contains macros to color the text in the command line)]
 1) Colors.h
 2) Scheduler.h
 3) CliLayout.h
