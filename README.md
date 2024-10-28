@@ -20,4 +20,4 @@ Misc:
 
 Note:
 1) csopsey-log.txt doesn't use append mode. Meaning its contents get overwritten everytime the "report-util" command is called.
-2) I'm not sure how the scheduler will stop, if it will exit only if all process are finished executing or if it will exit once the "scheduler-stop" is called regardless if processes are not yet finished executing. Thus, please test the "Exit Conditions" I have placed in the comments for each function corresponding to the algorithm. Do note that only "Exit Condition" should be present for each algorithm. Thus, comment out the other "Exit Condition". 
+2) I'm not sure how the scheduler will stop, if it will exit only if all processes are finished executing or if it will exit once the "scheduler-stop" is called regardless if processes are not yet finished executing. Thus, please test the "Exit Conditions" I have placed in the comments for each function corresponding to the algorithm. Do note that only "Exit Condition" should be present for each algorithm. Thus, comment out the other "Exit Condition". 
