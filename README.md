@@ -21,5 +21,5 @@ Misc:
 Note:
 1) csopsey-log.txt doesn't use append mode. Meaning its contents get overwritten everytime the "report-util" command is called.
 2) Run the program in C++ 20.
-3) Use the latest version.
+3) Use the latest version of the program.
 4) The program does not check if the values for "config.txt" are correct as it is not required as said by Sir. Mantua.
