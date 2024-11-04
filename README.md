@@ -22,5 +22,4 @@ Misc:
 How to run
 1) Open "CSOPESY MCO1 v2.sln"
 2) Run the program in C++ 20.
-3) Use the latest version of the program.
-4) The program does not check if the values for "config.txt" are correct as it is not required as said by Sir. Mantua.
+
