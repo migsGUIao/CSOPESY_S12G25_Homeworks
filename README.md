@@ -1,4 +1,5 @@
-Rewrote the whole code in OOP paradigm to accomodate readability and scalability of code. The code contains 5 header and cpp files.
+CSOPESY - MCO1
+Members: Andreo Canilao, Bryle Magura, Migs Guiao, Ralph Garcia
 
 Header files: [Contains function prototypes and fields of the corresponding class (except Colors.h which contains macros to color the text in the command line)]
 1) Colors.h
