@@ -22,4 +22,4 @@ Misc:
 How to run
 1) Open "CSOPESY MCO1 v2.sln"
 2) Run the program in C++ 20.
-
+3) Enter the command "initialize" to recognize other commands
