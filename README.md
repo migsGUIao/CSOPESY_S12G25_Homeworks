@@ -19,8 +19,8 @@ Misc:
 1) config.txt - Contains program configurations.
 2) csopsey-log.txt - Contains output from the command "report-util".
 
-Note:
-1) csopsey-log.txt doesn't use append mode. Meaning its contents get overwritten everytime the "report-util" command is called.
+How to run
+1) Open "CSOPESY MCO1 v2.sln"
 2) Run the program in C++ 20.
 3) Use the latest version of the program.
 4) The program does not check if the values for "config.txt" are correct as it is not required as said by Sir. Mantua.
