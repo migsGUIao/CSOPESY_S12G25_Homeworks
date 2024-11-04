@@ -19,7 +19,7 @@ Misc:
 1) config.txt - Contains program configurations.
 2) csopsey-log.txt - Contains output from the command "report-util".
 
-How to run
+How to run:
 1) Download the Zip
 2) Open "CSOPESY MCO1 v2.sln" in visual studio
 3) Run the program in C++ 20 by click the play button.
