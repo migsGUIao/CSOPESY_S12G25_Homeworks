@@ -1,0 +1,102 @@
+CPU utilization: 0%
+Total cores: 5
+Cores used: 0
+Cores available: 5
+
+----------------------------------------------------------------------------------------------------
+Running Processes: 
+Process88                (10/30/2024  07:11:52 PM)          Core: 4        48/50     
+Process89                (10/30/2024  07:11:53 PM)          Core: 2        33/50     
+Process90                (10/30/2024  07:11:53 PM)          Core: 1        18/50     
+Process91                (10/30/2024  07:11:54 PM)          Core: 0        3/50      
+
+Finished Processes: 
+Games                    (10/30/2024  07:09:57 PM)          Finished       50/50     
+Logs                     (10/30/2024  07:10:02 PM)          Finished       50/50     
+Process10                (10/30/2024  07:10:38 PM)          Finished       50/50     
+Process11                (10/30/2024  07:10:38 PM)          Finished       50/50     
+Process12                (10/30/2024  07:10:39 PM)          Finished       50/50     
+Process13                (10/30/2024  07:10:39 PM)          Finished       50/50     
+Process14                (10/30/2024  07:10:40 PM)          Finished       50/50     
+Process15                (10/30/2024  07:10:40 PM)          Finished       50/50     
+Process16                (10/30/2024  07:10:40 PM)          Finished       50/50     
+Process17                (10/30/2024  07:10:41 PM)          Finished       50/50     
+Process18                (10/30/2024  07:10:41 PM)          Finished       50/50     
+Process19                (10/30/2024  07:10:42 PM)          Finished       50/50     
+Process2                 (10/30/2024  07:10:34 PM)          Finished       50/50     
+Process20                (10/30/2024  07:10:42 PM)          Finished       50/50     
+Process21                (10/30/2024  07:10:43 PM)          Finished       50/50     
+Process22                (10/30/2024  07:10:43 PM)          Finished       50/50     
+Process23                (10/30/2024  07:10:44 PM)          Finished       50/50     
+Process24                (10/30/2024  07:10:44 PM)          Finished       50/50     
+Process25                (10/30/2024  07:10:45 PM)          Finished       50/50     
+Process26                (10/30/2024  07:10:45 PM)          Finished       50/50     
+Process27                (10/30/2024  07:11:24 PM)          Finished       50/50     
+Process28                (10/30/2024  07:11:24 PM)          Finished       50/50     
+Process29                (10/30/2024  07:11:25 PM)          Finished       50/50     
+Process3                 (10/30/2024  07:10:34 PM)          Finished       50/50     
+Process30                (10/30/2024  07:11:25 PM)          Finished       50/50     
+Process31                (10/30/2024  07:11:26 PM)          Finished       50/50     
+Process32                (10/30/2024  07:11:26 PM)          Finished       50/50     
+Process33                (10/30/2024  07:11:27 PM)          Finished       50/50     
+Process34                (10/30/2024  07:11:27 PM)          Finished       50/50     
+Process35                (10/30/2024  07:11:28 PM)          Finished       50/50     
+Process36                (10/30/2024  07:11:28 PM)          Finished       50/50     
+Process37                (10/30/2024  07:11:29 PM)          Finished       50/50     
+Process38                (10/30/2024  07:11:29 PM)          Finished       50/50     
+Process39                (10/30/2024  07:11:30 PM)          Finished       50/50     
+Process4                 (10/30/2024  07:10:35 PM)          Finished       50/50     
+Process40                (10/30/2024  07:11:30 PM)          Finished       50/50     
+Process41                (10/30/2024  07:11:30 PM)          Finished       50/50     
+Process42                (10/30/2024  07:11:31 PM)          Finished       50/50     
+Process43                (10/30/2024  07:11:31 PM)          Finished       50/50     
+Process44                (10/30/2024  07:11:32 PM)          Finished       50/50     
+Process45                (10/30/2024  07:11:32 PM)          Finished       50/50     
+Process46                (10/30/2024  07:11:33 PM)          Finished       50/50     
+Process47                (10/30/2024  07:11:33 PM)          Finished       50/50     
+Process48                (10/30/2024  07:11:34 PM)          Finished       50/50     
+Process49                (10/30/2024  07:11:34 PM)          Finished       50/50     
+Process5                 (10/30/2024  07:10:35 PM)          Finished       50/50     
+Process50                (10/30/2024  07:11:35 PM)          Finished       50/50     
+Process51                (10/30/2024  07:11:35 PM)          Finished       50/50     
+Process52                (10/30/2024  07:11:36 PM)          Finished       50/50     
+Process53                (10/30/2024  07:11:36 PM)          Finished       50/50     
+Process54                (10/30/2024  07:11:37 PM)          Finished       50/50     
+Process55                (10/30/2024  07:11:37 PM)          Finished       50/50     
+Process56                (10/30/2024  07:11:38 PM)          Finished       50/50     
+Process57                (10/30/2024  07:11:38 PM)          Finished       50/50     
+Process58                (10/30/2024  07:11:38 PM)          Finished       50/50     
+Process59                (10/30/2024  07:11:39 PM)          Finished       50/50     
+Process6                 (10/30/2024  07:10:36 PM)          Finished       50/50     
+Process60                (10/30/2024  07:11:39 PM)          Finished       50/50     
+Process61                (10/30/2024  07:11:40 PM)          Finished       50/50     
+Process62                (10/30/2024  07:11:40 PM)          Finished       50/50     
+Process63                (10/30/2024  07:11:41 PM)          Finished       50/50     
+Process64                (10/30/2024  07:11:41 PM)          Finished       50/50     
+Process65                (10/30/2024  07:11:42 PM)          Finished       50/50     
+Process66                (10/30/2024  07:11:42 PM)          Finished       50/50     
+Process67                (10/30/2024  07:11:43 PM)          Finished       50/50     
+Process68                (10/30/2024  07:11:43 PM)          Finished       50/50     
+Process69                (10/30/2024  07:11:44 PM)          Finished       50/50     
+Process7                 (10/30/2024  07:10:36 PM)          Finished       50/50     
+Process70                (10/30/2024  07:11:44 PM)          Finished       50/50     
+Process71                (10/30/2024  07:11:45 PM)          Finished       50/50     
+Process72                (10/30/2024  07:11:45 PM)          Finished       50/50     
+Process73                (10/30/2024  07:11:45 PM)          Finished       50/50     
+Process74                (10/30/2024  07:11:46 PM)          Finished       50/50     
+Process75                (10/30/2024  07:11:46 PM)          Finished       50/50     
+Process76                (10/30/2024  07:11:47 PM)          Finished       50/50     
+Process77                (10/30/2024  07:11:47 PM)          Finished       50/50     
+Process78                (10/30/2024  07:11:48 PM)          Finished       50/50     
+Process79                (10/30/2024  07:11:48 PM)          Finished       50/50     
+Process8                 (10/30/2024  07:10:37 PM)          Finished       50/50     
+Process80                (10/30/2024  07:11:49 PM)          Finished       50/50     
+Process81                (10/30/2024  07:11:49 PM)          Finished       50/50     
+Process82                (10/30/2024  07:11:50 PM)          Finished       50/50     
+Process83                (10/30/2024  07:11:50 PM)          Finished       50/50     
+Process84                (10/30/2024  07:11:51 PM)          Finished       50/50     
+Process85                (10/30/2024  07:11:51 PM)          Finished       50/50     
+Process86                (10/30/2024  07:11:52 PM)          Finished       50/50     
+Process87                (10/30/2024  07:11:52 PM)          Finished       50/50     
+Process9                 (10/30/2024  07:10:37 PM)          Finished       50/50     
+----------------------------------------------------------------------------------------------------
