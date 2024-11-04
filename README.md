@@ -22,6 +22,7 @@ Misc:
 How to run:
 1) Download the Zip
 2) Open "CSOPSEY MO1 v2.sln" in visual studio
-3) Run the program in C++ 20 by clicking the play button.
-4) Enter the command "initialize" to recognize other commands
-5) Type exit to terminate the OS emulator
+3) Configure the solution to run in C++ 20
+4) Run the program by clicking the play button.
+5) Enter the command "initialize" to recognize other commands
+6) Type exit to terminate the OS emulator
