@@ -1,6 +1,6 @@
 For week 8 homework of CSOPSEY and continuation to MO1:
-- Added MemoryAllocator class to represent processes running in the memory
-- Files regarding the memory repsentation is located at the "memory_files" directory
+- Added MemoryAllocator class to represent processes running in the memory.
+- Files regarding the memory repsentation is located at the "memory_files" directory. If that directory does not exist, the program will automatically create one for you.
 - For convience, everytime the program starts, all of the contents of "memory_files" is deleted. Make sure to save before running the program.
 
 Notes:
