@@ -1,0 +1,1 @@
+Final Version of CSOPSEY MO1. In the previous version, scheduler-stop command stops the scheduler in executing the process and stops it from creating new processes. Now, the scheduler-stop command only stops the scheduler in creating new processes.
