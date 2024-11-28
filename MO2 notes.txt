@@ -5,3 +5,6 @@ PagingAllocator.cpp is somewhat complete and is in sync with the scheduler. I sa
 the program to hang. Probably a thread synchronization or logic issue with how PagingAllocator was implemented.
 
 FlatMemoryAllocator has not yet been implemented. 
+
+
+Vmstat and process-smi is already completed for PagingAllocator ONLY.
