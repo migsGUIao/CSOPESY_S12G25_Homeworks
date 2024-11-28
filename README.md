@@ -1,4 +1,4 @@
-CSOPESY - MCO1
+CSOPESY - MCO2
 Members: Andreo Canilao, Bryle Magura, Migs Guiao, Ralph Garcia
 
 Header files: [Contains function prototypes and fields of the corresponding class (except Colors.h which contains macros to color the text in the command line)]
