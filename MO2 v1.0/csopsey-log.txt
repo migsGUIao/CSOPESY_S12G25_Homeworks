@@ -1,0 +1,34 @@
+CPU utilization: 0%
+Total cores: 8
+Cores used: 0
+Cores available: 8
+
+----------------------------------------------------------------------------------------------------
+Running Processes: 
+
+Finished Processes: 
+Process0                 (11/27/2024  03:56:24 AM)          Finished       100/100   
+Process1                 (11/27/2024  03:56:24 AM)          Finished       100/100   
+Process10                (11/27/2024  03:56:27 AM)          Finished       100/100   
+Process11                (11/27/2024  03:56:27 AM)          Finished       100/100   
+Process12                (11/27/2024  03:56:28 AM)          Finished       100/100   
+Process13                (11/27/2024  03:56:28 AM)          Finished       100/100   
+Process14                (11/27/2024  03:56:28 AM)          Finished       100/100   
+Process15                (11/27/2024  03:56:29 AM)          Finished       100/100   
+Process16                (11/27/2024  03:56:29 AM)          Finished       100/100   
+Process17                (11/27/2024  03:56:29 AM)          Finished       100/100   
+Process18                (11/27/2024  03:56:29 AM)          Finished       100/100   
+Process19                (11/27/2024  03:56:30 AM)          Finished       100/100   
+Process2                 (11/27/2024  03:56:24 AM)          Finished       100/100   
+Process20                (11/27/2024  03:56:30 AM)          Finished       100/100   
+Process21                (11/27/2024  03:56:30 AM)          Finished       100/100   
+Process22                (11/27/2024  03:56:31 AM)          Finished       100/100   
+Process23                (11/27/2024  03:56:31 AM)          Finished       100/100   
+Process3                 (11/27/2024  03:56:25 AM)          Finished       100/100   
+Process4                 (11/27/2024  03:56:25 AM)          Finished       100/100   
+Process5                 (11/27/2024  03:56:25 AM)          Finished       100/100   
+Process6                 (11/27/2024  03:56:26 AM)          Finished       100/100   
+Process7                 (11/27/2024  03:56:26 AM)          Finished       100/100   
+Process8                 (11/27/2024  03:56:26 AM)          Finished       100/100   
+Process9                 (11/27/2024  03:56:27 AM)          Finished       100/100   
+----------------------------------------------------------------------------------------------------
