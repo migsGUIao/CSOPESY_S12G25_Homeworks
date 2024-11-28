@@ -1,7 +1,7 @@
 In addition to the header, cpp, and text files in the MO1, MemoryAllocator.h was created which is an abstract class that will be inherited PagingAllocator.cpp and FlatMemoryAllocator.cpp. Also, a folder named 
 "backing_store" is created.
 
-PagingAllocator.cpp is somewhat complete and is in sync with the scheduler. I say "somewhat" because it works for most test cases, I ran except for round robin with different min and max process memory, which caused
+PagingAllocator.cpp is somewhat complete and is in sync with the scheduler. I say "somewhat" because it works for most test cases I ran except for round robin with different min and max process memory, which caused
 the program to hang. Probably a thread synchronization or logic issue with how PagingAllocator was implemented.
 
 FlatMemoryAllocator has not yet been implemented. 
