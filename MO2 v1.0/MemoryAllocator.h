@@ -18,7 +18,7 @@ protected:
 	virtual bool canAllocate(int, int) = 0;
 	virtual void allocateAt(shared_ptr<Process>, int, int) = 0;
 	virtual void checkBackingStore(shared_ptr<Process>) = 0;
-	// virtual void backingStore() = 0;
+	virtual void backingStore() = 0;
 	virtual bool checkAllocationMap(shared_ptr<Process>) = 0;
 
 public:

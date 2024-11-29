@@ -37,7 +37,23 @@ private:
 		}
 	}
 
-	void backingStore(shared_ptr<Process> process) {
+	void backingStore() override {
+
+		// Remove process that is currently on standby in memory
+		shared_ptr<Process> process;
+
+		// Find process in allocation map
+		for (auto it = allocationMap.begin(); it != allocationMap.end(); it++) {
+			if (it->second->getStatus() != "RUNNING") {
+				process = it->second;
+				break;
+			}
+		}
+
+		// No process found, exit function
+		if (!process) {
+			return;
+		}
 
 		// Deallocate process in the memory
 		deallocate(process);
@@ -106,24 +122,9 @@ public:
 			required_frames++;
 		}
 		
-		/*
 		if (required_frames > getAvailableFrames()) {
 			backingStore();
 		}
-		*/
-		// If not enough frames are available, evict the oldest process until there's space
-		
-		int required_frames_copy = required_frames;
-		while (required_frames_copy > getAvailableFrames()) {
-			if (!allocationMap.empty()) {
-				// Evict the oldest process 
-				auto oldest = allocationMap.begin();
-				shared_ptr<Process> oldestProcess = oldest->second;
-				deallocate(oldestProcess);
-				backingStore(oldestProcess); // Store the evicted process in the backing store
-			} 
-			required_frames_copy--;
-   	 	}
 
 		for (int i = 0; i <= memory.size() - required_frames; i++) {
 			if (canAllocate(required_frames, i)) {
