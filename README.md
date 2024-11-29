@@ -25,7 +25,7 @@ Misc:
 
 How to run:
 1) Download the Zip
-2) Open "CSOPSEY MO2 v1.0" folder
+2) Open "MO2 v1.0" folder
 3) Open "MO2 v1.0.sln" project
 4) Configure the solution to run in C++ 20
 5) Run the program by clicking the play button.
