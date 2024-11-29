@@ -40,7 +40,7 @@ private:
 		}
 	}
 
-	void backingStore() override {
+	void backingStore() {
 
 		// Remove process that is currently on standby in memory
 		shared_ptr<Process> process;

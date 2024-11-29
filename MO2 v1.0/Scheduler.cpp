@@ -37,8 +37,8 @@ Scheduler::Scheduler(string filename) {
 	if (max_overall_mem != mem_per_frame) {
 		this->memoryAllocator = make_unique<PagingAllocator>(max_overall_mem, mem_per_frame);
 	} else {
-		/*this->memoryAllocator = make_unique<FlatMemoryAllocator>();*/
 		// TO DO: Implement FlatMemoryAllocator
+		this->memoryAllocator = make_unique<FlatMemoryAllocator>(max_overall_mem, mem_per_frame);
 	}
 	
 
@@ -58,7 +58,7 @@ void Scheduler::createProcess(string processName)
 	processMap[processName] = newProcess;
 	processQueue.push(newProcess);
 	pid++;
-
+	
 	cv.notify_one();
 }
 
@@ -318,6 +318,20 @@ string Scheduler::getProcess_smiInfo()
 	}
 	else if (dynamic_pointer_cast<FlatMemoryAllocator>(memoryAllocator)) {
 		// TO DO: Implement
+		int mem_used = memoryAllocator->getTotalMemoryUsed();
+		float cpu_util = static_cast<float>(nActiveCores * 100 / num_cpu);
+		float mem_util = static_cast<float>(mem_used * 100 / max_overall_mem);
+
+		info += to_string(cpu_util) + " ";
+		info += to_string(mem_used) + " ";
+		info += to_string(max_overall_mem) + " ";
+		info += to_string(mem_util) + " ";
+
+
+		for (auto lt = memoryMap.begin(); lt != memoryMap.end(); lt++) {
+			info += lt->second->getName() + " ";
+			info += to_string(lt->second->getTotalMemory()) + " ";
+		}
 	}
 
 	return info;
@@ -327,7 +341,7 @@ string Scheduler::getVmstatInfo()
 {
 	string info;
 
-	if (dynamic_pointer_cast<PagingAllocator>(memoryAllocator)) {
+	if (dynamic_pointer_cast<PagingAllocator>(memoryAllocator)) { 
 		info += to_string(max_overall_mem) + " ";
 		info += to_string(memoryAllocator->getTotalMemoryUsed()) + " ";
 		info += to_string(max_overall_mem - memoryAllocator->getTotalMemoryUsed()) + " ";
@@ -336,12 +350,24 @@ string Scheduler::getVmstatInfo()
 		info += to_string(cpuCycles) + " ";
 		info += to_string(dynamic_pointer_cast<PagingAllocator>(memoryAllocator)->getNumPagesIn()) + " ";
 		info += to_string(dynamic_pointer_cast<PagingAllocator>(memoryAllocator)->getNumPagesOut()) + " ";
+		
+		info += to_string(completed_processes);
+	}
+
+	else if (dynamic_pointer_cast<FlatMemoryAllocator>(memoryAllocator)){
+		// TO DO: Implement
+		info += to_string(max_overall_mem) + " ";
+		info += to_string(memoryAllocator->getTotalMemoryUsed()) + " ";
+		info += to_string(max_overall_mem - memoryAllocator->getTotalMemoryUsed()) + " ";
+		info += to_string(idleCycles) + " ";
+		info += to_string(activeCycles) + " ";
+		info += to_string(cpuCycles) + " ";
+		info += "0 ";
+		info += "0 ";
 
 		info += to_string(completed_processes);
 	}
-	else if (dynamic_pointer_cast<FlatMemoryAllocator>(memoryAllocator)){
-		// TO DO: Implement
-	}
+	
 
 	return info;
 }
