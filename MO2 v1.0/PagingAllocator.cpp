@@ -133,6 +133,10 @@ public:
 			backingStore();
 		}
 
+		if (required_frames > getAvailableFrames()) {
+			return false;
+		}
+
 		for (int i = 0; i <= memory.size() - required_frames; i++) {
 			if (canAllocate(required_frames, i)) {
 				allocateAt(process, required_frames, i);
