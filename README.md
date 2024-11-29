@@ -7,6 +7,7 @@ Header files: [Contains function prototypes and fields of the corresponding clas
 3) CliLayout.h
 4) Process.h
 5) CliManager.h
+6) MemoryAllocator.h
 
 C++ files:
 1) Main.cpp - Contains the main function
@@ -14,10 +15,13 @@ C++ files:
 3) CliLayout.cpp - Contains the layout used for program output.
 4) Process.cpp - Contains process information.
 5) CliManager.cpp - Manages the whole program and serves as an intermediary between all classes.
+6) PagingAllocator.cpp - Contains the implementation for the paging allocator and is a child class of MemoryAllocator.
+7) FlatMemoryAllocator.cpp - Contains the implementation for the flat memory allocator and is a child class of MemoryAllocator.
 
 Misc:
 1) config.txt - Contains program configurations.
 2) csopsey-log.txt - Contains output from the command "report-util".
+3) backing_store - A directory containing the backing store of processes.
 
 How to run:
 1) Download the Zip
